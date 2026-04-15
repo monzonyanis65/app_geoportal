@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  # Base de datos con extensión PostGIS
+  db:
+    image: postgis/postgis:14-3.3
+    container_name: geoportal_db
+    environment:
+      - POSTGRES_DB=catastrogis
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=tu_contraseña_aqui
+    volumes:
+      - geoportal_db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  # GeoServer para servir los mapas
+  geoserver:
+    image: kartoza/geoserver:2.24.1
+    container_name: geoserver
+    environment:
+      - GEOSERVER_DATA_DIR=/opt/geoserver/data_dir
+      - CORS_ENABLED=true
+      - CORS_ALLOWED_ORIGINS=*
+    volumes:
+      - ./geoserver_data:/opt/geoserver/data_dir
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  # Backend (API de Búsqueda)
+  api:
+    build: ./backend
+    container_name: geoportal_api
+    environment:
+      - DB_USER=postgres
+      - DB_PASSWORD=tu_contraseña_aqui
+      - DB_NAME=catastrogis
+      - DB_HOST=db
+      - DB_PORT=5432
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
+  # Frontend (React + Nginx)
+  web:
+    build: 
+      context: ./frontend
+    container_name: geoportal_frontend
+    environment:
+      - VITE_GEOSERVER_URL=http://tu_ip_azure:8080/geoserver/geoportal/wms
+      - VITE_API_URL=http://tu_ip_azure:3000
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+      - geoserver
+
+volumes:
+  geoportal_db_data:
