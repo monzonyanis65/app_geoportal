@@ -48,10 +48,10 @@ services:
   web:
     build: 
       context: ./frontend
+      args:
+        - VITE_GEOSERVER_URL=http://135.225.106.61:8080/geoserver/geoportal/wms
+        - VITE_API_URL=http://135.225.106.61:3000
     container_name: geoportal_frontend
-    environment:
-      - VITE_GEOSERVER_URL=http://tu_ip_azure:8080/geoserver/geoportal/wms
-      - VITE_API_URL=http://tu_ip_azure:3000
     ports:
       - "80:80"
     depends_on:

@@ -1,11 +1,14 @@
 # Stage 1: Build
-FROM node:18-slim AS build
+FROM node:20-slim AS build
+
+ARG VITE_GEOSERVER_URL
+ARG VITE_API_URL
 
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build
+RUN VITE_GEOSERVER_URL=$VITE_GEOSERVER_URL VITE_API_URL=$VITE_API_URL npm run build
 
 # Stage 2: Serve with Nginx
 FROM nginx:alpine
