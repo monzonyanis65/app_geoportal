@@ -9,10 +9,19 @@ services:
       - POSTGRES_DB=catastrogis
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=12345678
+    command: 
+      - "postgres"
+      - "-c"
+      - "shared_buffers=1GB"
+      - "-c"
+      - "max_connections=200"
+      - "-c"
+      - "work_mem=32MB"
     volumes:
       - geoportal_db_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    restart: always
 
   # GeoServer para servir los mapas
   geoserver:
@@ -22,12 +31,15 @@ services:
       - GEOSERVER_DATA_DIR=/opt/geoserver/data_dir
       - CORS_ENABLED=true
       - CORS_ALLOWED_ORIGINS=*
+      # Aumentamos la memoria RAM para manejar las 382 capas
+      - JAVA_OPTS=-Xms2g -Xmx4g -Djava.awt.headless=true -XX:+UseG1GC
     volumes:
       - ./geoserver_data:/opt/geoserver/data_dir
     ports:
       - "8080:8080"
     depends_on:
       - db
+    restart: always
 
   # Backend (API de Búsqueda)
   api:
@@ -43,6 +55,7 @@ services:
       - "3000:3000"
     depends_on:
       - db
+    restart: always
 
   # Frontend (React + Nginx)
   web:
@@ -57,6 +70,7 @@ services:
     depends_on:
       - api
       - geoserver
+    restart: always
 
 volumes:
   geoportal_db_data:
