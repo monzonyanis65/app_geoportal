@@ -3,12 +3,12 @@ version: '3.8'
 services:
   # Base de datos con extensión PostGIS
   db:
-    image: postgis/postgis:14-3.3
+    image: postgis/postgis:17-3.5
     container_name: geoportal_db
     environment:
       - POSTGRES_DB=catastrogis
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=tu_contraseña_aqui
+      - POSTGRES_PASSWORD=12345678
     volumes:
       - geoportal_db_data:/var/lib/postgresql/data
     ports:
@@ -35,7 +35,7 @@ services:
     container_name: geoportal_api
     environment:
       - DB_USER=postgres
-      - DB_PASSWORD=tu_contraseña_aqui
+      - DB_PASSWORD=12345678
       - DB_NAME=catastrogis
       - DB_HOST=db
       - DB_PORT=5432
