@@ -31,13 +31,13 @@ const SAN_CRISTOBAL_BOUNDS = [
 ];
 
 const CAPAS_WMS = [
-    { id: 'geoportal:Concordia', name: 'Concordia (Comercios)', color: 'bg-red-500', hexColor: '#ef4444', defaultActive: false, labelField: 'Razon Social', labelMaxScale: 2000, category: 'parroquia' },
+    { id: 'geoportal:concordia_etiquetas', name: 'Concordia (Comercios)', color: 'bg-red-500', hexColor: '#ef4444', defaultActive: false, labelField: 'razon_social', labelMaxScale: 2000, category: 'parroquia' },
     { id: 'geoportal:Man_sc', name: 'Manzanas', color: 'bg-blue-500', hexColor: '#3b82f6', defaultActive: false, labelField: 'id_manzana', labelMaxScale: 15000, category: 'base' },
     { id: 'geoportal:Parroquias_sc', name: 'Parroquias', color: 'bg-green-500', hexColor: '#22c55e', defaultActive: false, labelField: 'nombre', labelMaxScale: 100000, category: 'base' },
     { id: 'geoportal:Sectores_Sc', name: 'Sectores', color: 'bg-purple-500', hexColor: '#a855f7', defaultActive: false, labelField: 'sector', labelMaxScale: 40000, category: 'base' },
-    { id: 'geoportal:pmm', name: 'Pedro Maria Morantes', color: 'bg-orange-500', hexColor: '#f97316', defaultActive: false, labelField: 'Razon Social', labelMaxScale: 2000, category: 'parroquia' },
-    { id: 'geoportal:sjb', name: 'San Juan Bautista', color: 'bg-cyan-500', hexColor: '#06b6d4', defaultActive: false, labelField: 'Razon Social', labelMaxScale: 2000, category: 'parroquia' },
-    { id: 'geoportal:ssb', name: 'San Sebastian', color: 'bg-pink-500', hexColor: '#ec4899', defaultActive: false, labelField: 'Razon Social', labelMaxScale: 2000, category: 'parroquia' },
+    { id: 'geoportal:pmm_etiquetas', name: 'Pedro Maria Morantes', color: 'bg-orange-500', hexColor: '#f97316', defaultActive: false, labelField: 'razon_social', labelMaxScale: 2000, category: 'parroquia' },
+    { id: 'geoportal:sjb_etiquetas', name: 'San Juan Bautista', color: 'bg-cyan-500', hexColor: '#06b6d4', defaultActive: false, labelField: 'razon_social', labelMaxScale: 2000, category: 'parroquia' },
+    { id: 'geoportal:ssb_etiquetas', name: 'San Sebastian', color: 'bg-pink-500', hexColor: '#ec4899', defaultActive: false, labelField: 'razon_social', labelMaxScale: 2000, category: 'parroquia' },
     { id: 'geoportal:Sambil_Locales_pb', name: 'Sambil - Planta Baja', color: 'bg-amber-600', hexColor: '#d97706', defaultActive: false, labelField: 'Razon_Social', labelMaxScale: 1500, category: 'sambil' },
     { id: 'geoportal:Sambil_Locales_p1', name: 'Sambil - Nivel 1', color: 'bg-yellow-500', hexColor: '#eab308', defaultActive: false, labelField: 'Razon_Social', labelMaxScale: 1500, category: 'sambil' }
 ];
