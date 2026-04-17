@@ -149,9 +149,18 @@ function WMSGetFeatureInfo({ url, idsCapasActivas, alEncontrarLugar }) {
             const Y = Math.round(e.containerPoint.y);
 
             // GeoServer espera una lista de capas separadas por comas
-            const layersStr = idsCapasActivas.join(',');
+            // INYECTAMOS BYPASS: Reemplazamos las vistas SQL que dan NullPointerException
+            // por sus tablas base físicas equivalentes SOLO para el evento de click.
+            const queryLayersArray = idsCapasActivas.map(id => {
+                if (id === 'geoportal:concordia_etiquetas') return 'geoportal:Concordia';
+                if (id === 'geoportal:pmm_etiquetas') return 'geoportal:pmm';
+                if (id === 'geoportal:sjb_etiquetas') return 'geoportal:sjb';
+                if (id === 'geoportal:ssb_etiquetas') return 'geoportal:ssb';
+                return id;
+            });
+            const queryLayersStr = queryLayersArray.join(',');
 
-            const getFeatureInfoUrl = `${url}?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&LAYERS=${layersStr}&QUERY_LAYERS=${layersStr}&BBOX=${BBOX}&FEATURE_COUNT=1&HEIGHT=${HEIGHT}&WIDTH=${WIDTH}&INFO_FORMAT=application/json&SRS=EPSG:4326&X=${X}&Y=${Y}&FORMAT=image/png&STYLES=`;
+            const getFeatureInfoUrl = `${url}?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&LAYERS=${queryLayersStr}&QUERY_LAYERS=${queryLayersStr}&BBOX=${BBOX}&FEATURE_COUNT=1&HEIGHT=${HEIGHT}&WIDTH=${WIDTH}&INFO_FORMAT=application/json&SRS=EPSG:4326&X=${X}&Y=${Y}&FORMAT=image/png&STYLES=`;
             // Por defecto GeoServer WMS GetFeatureInfo application/json incluye la geometría si se solicita o por defecto en versiones mas recientes
 
             fetch(getFeatureInfoUrl)
