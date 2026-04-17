@@ -160,8 +160,7 @@ function WMSGetFeatureInfo({ url, idsCapasActivas, alEncontrarLugar }) {
             });
             const queryLayersStr = queryLayersArray.join(',');
 
-            const getFeatureInfoUrl = `${url}?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&LAYERS=${queryLayersStr}&QUERY_LAYERS=${queryLayersStr}&BBOX=${BBOX}&FEATURE_COUNT=1&HEIGHT=${HEIGHT}&WIDTH=${WIDTH}&INFO_FORMAT=application/json&SRS=EPSG:4326&X=${X}&Y=${Y}&FORMAT=image/png&STYLES=`;
-            // Por defecto GeoServer WMS GetFeatureInfo application/json incluye la geometría si se solicita o por defecto en versiones mas recientes
+            const getFeatureInfoUrl = `${API_BASE_URL}/api/click?lat=${e.latlng.lat}&lng=${e.latlng.lng}&layers=${idsCapasActivas.join(',')}`;
 
             fetch(getFeatureInfoUrl)
                 .then(res => res.json())

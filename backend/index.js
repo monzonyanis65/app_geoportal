@@ -141,6 +141,74 @@ app.get('/api/search', async (req, res) => {
     }
 });
 
+// New endpoint to handle map clicks directly via PostGIS (Bypassing GeoServer GetFeatureInfo)
+app.get('/api/click', async (req, res) => {
+    try {
+        const { lat, lng, layers } = req.query;
+        if (!lat || !lng) return res.status(400).json({ error: 'Lat and Lng are required' });
+
+        let searchTables = [
+            { schema: 'concordia', table: 'Concordia' },
+            { schema: 'pmm', table: 'pmm' },
+            { schema: 'sjb', table: 'sjb' },
+            { schema: 'ssb', table: 'ssb' },
+            { schema: 'public', table: 'Sambil_Locales_pb' },
+            { schema: 'public', table: 'Sambil_Locales_p1' }
+        ];
+
+        if (layers) {
+            const activeLayers = layers.split(',').map(l => l.toLowerCase().replace('geoportal:', ''));
+            searchTables = searchTables.filter(st => {
+                const tb = st.table.toLowerCase();
+                return activeLayers.some(al => al.includes(tb));
+            });
+        }
+
+        const clickPromises = searchTables.map(async (st) => {
+            try {
+                // Create a point in EPSG:4326 (lat/lng), transform to EPSG:32618 (local projection)
+                // Intersect with the geometry column. Fallback SRID forcing to avoid projection errors.
+                const sql = `
+                    SELECT 
+                        *, 
+                        ST_AsGeoJSON(ST_Transform(ST_SetSRID(geom, 32618), 4326)) as geom_json
+                    FROM "${st.schema}"."${st.table}"
+                    WHERE ST_Intersects(
+                        ST_SetSRID(geom, 32618), 
+                        ST_Transform(ST_SetSRID(ST_MakePoint($1, $2), 4326), 32618)
+                    )
+                    LIMIT 1;
+                `;
+                const dbRes = await pool.query(sql, [parseFloat(lng), parseFloat(lat)]);
+                
+                if (dbRes.rows.length > 0) {
+                    return dbRes.rows.map(r => {
+                        const { geom, geom_json, ...props } = r;
+                        return {
+                            type: 'Feature',
+                            geometry: geom_json ? JSON.parse(geom_json) : null,
+                            properties: { ...props, schema: st.schema, table: st.table }
+                        };
+                    });
+                }
+                return [];
+            } catch (err) {
+                console.error(`Click failed on ${st.schema}.${st.table}:`, err.message);
+                return [];
+            }
+        });
+
+        const resultsArrays = await Promise.all(clickPromises);
+        const features = resultsArrays.flat();
+
+        res.json({ type: 'FeatureCollection', features });
+
+    } catch (err) {
+        console.error('Click error:', err);
+        res.status(500).json({ error: err.message });
+    }
+});
+
 // Run server
 app.listen(port, () => {
     console.log(`Backend geoportal server listening at http://localhost:${port}`);
