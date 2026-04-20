@@ -22,7 +22,7 @@ L.Icon.Default.mergeOptions({
 const { BaseLayer } = LayersControl;
 
 const WMS_BASE_URL = import.meta.env.VITE_GEOSERVER_URL || 'http://localhost:8080/geoserver/geoportal/wms';
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const API_BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
 const DEFAULT_CENTER = [7.768, -72.225]; // San Cristóbal
 const DEFAULT_ZOOM = 13;
 const SAN_CRISTOBAL_BOUNDS = [

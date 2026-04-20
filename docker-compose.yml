@@ -62,8 +62,8 @@ services:
     build: 
       context: ./frontend
       args:
-        - VITE_GEOSERVER_URL=http://135.225.106.61:8080/geoserver/geoportal/wms
-        - VITE_API_URL=http://135.225.106.61:3000
+        - VITE_GEOSERVER_URL=/geoserver/geoportal/wms
+        - VITE_API_URL=
     container_name: geoportal_frontend
     ports:
       - "80:80"
