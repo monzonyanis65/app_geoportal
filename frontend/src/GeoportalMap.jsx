@@ -333,7 +333,7 @@ export default function GeoportalMap() {
 
                 <div className="flex flex-col items-center justify-center text-center px-2 flex-grow">
                     <h1 className="text-sm md:text-xl font-bold text-gray-800 tracking-tight leading-tight">Geoportal Catastral</h1>
-                    <p className="hidden md:block text-[13px] font-medium text-gray-500">Alcaldía del Municipio San Cristóbal</p>
+                    <p className="text-[9px] md:text-[13px] font-medium text-gray-500">Alcaldía del Municipio San Cristóbal</p>
                 </div>
 
                 {/* Sumat Logo */}
@@ -346,8 +346,8 @@ export default function GeoportalMap() {
             <div className="absolute top-[72px] left-0 right-0 bottom-0 z-0">
 
                 {/* Floating Search Bar (Optimizado para móvil) */}
-                <div className={`absolute top-4 left-4 z-[1000] w-[calc(100%-80px)] md:w-full md:max-w-[390px] transition-all duration-300 ${buscadorEnfocado ? 'shadow-2xl' : 'shadow-md'} bg-white rounded-2xl flex flex-col ${idsCapasActivas.length === 0 ? 'opacity-80' : ''}`}>
-                    <form onSubmit={manejarEnvioBusqueda} className="flex items-center px-4 py-3">
+                <div className={`absolute top-4 left-4 z-[1000] w-[calc(100%-110px)] md:w-full md:max-w-[390px] transition-all duration-300 ${buscadorEnfocado ? 'shadow-2xl' : 'shadow-md'} bg-white rounded-2xl flex flex-col ${idsCapasActivas.length === 0 ? 'opacity-80' : ''}`}>
+                    <form onSubmit={manejarEnvioBusqueda} className="flex items-center px-4 py-2 md:py-3">
                         <input
                             type="text"
                             placeholder={idsCapasActivas.length === 0 ? "Selecciona una capa para buscar..." : "Buscar lugares o RIF..."}
