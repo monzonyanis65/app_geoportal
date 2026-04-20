@@ -376,14 +376,14 @@ export default function GeoportalMap() {
                                 <div
                                     key={i}
                                     onMouseDown={() => manejarClickResultado(res)}
-                                    className="flex items-center gap-4 p-4 hover:bg-gray-50 cursor-pointer transition-colors"
+                                    className="flex items-center gap-3 md:gap-4 p-2.5 md:p-4 hover:bg-gray-50 cursor-pointer transition-colors"
                                 >
-                                    <div className="bg-gray-200 p-2 rounded-full text-gray-600">
-                                        <MapIcon size={18} />
+                                    <div className="bg-gray-200 p-1.5 md:p-2 rounded-full text-gray-600 flex-shrink-0">
+                                        <MapIcon size={16} className="md:w-[18px] md:h-[18px]" />
                                     </div>
-                                    <div>
-                                        <p className="font-medium text-gray-800 text-[15px]">{res.razon_social || res.type}</p>
-                                        <p className="text-sm text-gray-500 truncate max-w-[280px]">{res.direccion || 'Táchira, Venezuela'}</p>
+                                    <div className="min-w-0">
+                                        <p className="font-medium text-gray-800 text-sm md:text-[15px] truncate">{res.razon_social || res.type}</p>
+                                        <p className="text-xs md:text-sm text-gray-500 truncate max-w-[200px] md:max-w-[280px]">{res.direccion || 'Táchira, Venezuela'}</p>
                                     </div>
                                 </div>
                             ))}
@@ -575,13 +575,13 @@ export default function GeoportalMap() {
                             {(() => {
                                 const { nombre, direccion } = obtenerDetallesLugar(elementoClickeado.properties);
                                 return (
-                                    <div className="py-2 px-1">
-                                        <h3 className="font-bold text-gray-900 text-[16px] mb-2 leading-tight flex items-start gap-2">
-                                            <Compass size={18} className="text-blue-600 mt-0.5 flex-shrink-0" />
+                                    <div className="py-1 md:py-2 px-0.5 md:px-1">
+                                        <h3 className="font-bold text-gray-900 text-sm md:text-[16px] mb-1 md:mb-2 leading-tight flex items-start gap-1.5 md:gap-2">
+                                            <Compass size={16} className="text-blue-600 mt-0.5 flex-shrink-0 md:w-[18px] md:h-[18px]" />
                                             <span>{nombre}</span>
                                         </h3>
-                                        <div className="ml-6 bg-gray-50 p-2 rounded-lg border border-gray-100">
-                                            <p className="text-gray-600 text-[13.5px] leading-relaxed font-medium">{direccion}</p>
+                                        <div className="ml-5 md:ml-6 bg-gray-50 p-1.5 md:p-2 rounded-lg border border-gray-100">
+                                            <p className="text-gray-600 text-xs md:text-[13.5px] leading-relaxed font-medium">{direccion}</p>
                                         </div>
                                     </div>
                                 );
