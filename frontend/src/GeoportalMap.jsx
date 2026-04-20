@@ -356,7 +356,7 @@ export default function GeoportalMap() {
                             onFocus={() => { if (idsCapasActivas.length > 0) setBuscadorEnfocado(true) }}
                             onBlur={() => setTimeout(() => setBuscadorEnfocado(false), 200)}
                             disabled={idsCapasActivas.length === 0}
-                            className={`flex-1 outline-none text-[15px] placeholder-gray-500 text-gray-800 bg-transparent ${idsCapasActivas.length === 0 ? 'cursor-not-allowed' : ''}`}
+                            className={`flex-1 outline-none text-[13px] md:text-[15px] placeholder:text-[12px] md:placeholder:text-[15px] placeholder-gray-500 text-gray-800 bg-transparent ${idsCapasActivas.length === 0 ? 'cursor-not-allowed' : ''}`}
                         />
                         {estaBuscando ? (
                             <div className="p-2 ml-1 text-gray-400">
@@ -405,9 +405,9 @@ export default function GeoportalMap() {
                         {mostrarCapas && (
                             <div
                                 onMouseLeave={() => setMostrarCapas(false)}
-                                className="absolute top-14 right-0 w-64 bg-white rounded-2xl shadow-xl p-4 border border-gray-100 animate-in fade-in zoom-in-95 duration-200"
+                                className="absolute top-14 right-0 w-52 md:w-64 bg-white rounded-2xl shadow-xl p-3 md:p-4 border border-gray-100 animate-in fade-in zoom-in-95 duration-200"
                             >
-                                <div className="space-y-4">
+                                <div className="space-y-2 md:space-y-4">
                                     {/* Grupo 1: Capas Parroquia */}
                                     <div>
                                         <h3 className="text-[11px] font-bold text-blue-600 uppercase tracking-widest mb-2 px-2 flex items-center gap-2">
@@ -424,7 +424,7 @@ export default function GeoportalMap() {
                                                         className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 cursor-pointer"
                                                     />
                                                     <span className={`w-3 h-3 rounded-full ml-3 ${capa.color} shadow-sm border border-white`}></span>
-                                                    <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-900 transition-colors">
+                                                    <span className="ml-2 text-[13px] md:text-sm font-medium text-gray-700 group-hover:text-gray-900 transition-colors">
                                                         {capa.name.replace(' (Comercios)', '')}
                                                     </span>
                                                 </label>
@@ -448,7 +448,7 @@ export default function GeoportalMap() {
                                                         className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 cursor-pointer"
                                                     />
                                                     <span className={`w-3 h-3 rounded-full ml-3 ${capa.color} shadow-sm border border-white`}></span>
-                                                    <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-900 transition-colors">
+                                                    <span className="ml-2 text-[13px] md:text-sm font-medium text-gray-700 group-hover:text-gray-900 transition-colors">
                                                         {capa.name}
                                                     </span>
                                                 </label>
@@ -471,7 +471,7 @@ export default function GeoportalMap() {
                                                         className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 cursor-pointer"
                                                     />
                                                     <span className={`w-3 h-3 rounded-full ml-3 ${capa.color} shadow-sm border border-white`}></span>
-                                                    <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-900 transition-colors">
+                                                    <span className="ml-2 text-[13px] md:text-sm font-medium text-gray-700 group-hover:text-gray-900 transition-colors">
                                                         {capa.name}
                                                     </span>
                                                 </label>
