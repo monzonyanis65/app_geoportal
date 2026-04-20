@@ -153,7 +153,10 @@ app.get('/api/click', async (req, res) => {
             { schema: 'sjb', table: 'sjb' },
             { schema: 'ssb', table: 'ssb' },
             { schema: 'public', table: 'Sambil_Locales_pb' },
-            { schema: 'public', table: 'Sambil_Locales_p1' }
+            { schema: 'public', table: 'Sambil_Locales_p1' },
+            { schema: 'vialidad_manzanas', table: 'Man_sc' },
+            { schema: 'vialidad_manzanas', table: 'Parroquias_sc' },
+            { schema: 'vialidad_manzanas', table: 'Sectores_Sc' }
         ];
 
         if (layers) {
