@@ -379,7 +379,7 @@ export default function GeoportalMap() {
                                     className="flex items-center gap-3 md:gap-4 p-2.5 md:p-4 hover:bg-gray-50 cursor-pointer transition-colors"
                                 >
                                     <div className="bg-gray-200 p-1.5 md:p-2 rounded-full text-gray-600 flex-shrink-0">
-                                        <MapIcon size={16} className="md:w-[18px] md:h-[18px]" />
+                                        <MapIcon size={16} className="md:w-[10px] md:h-[10px]" />
                                     </div>
                                     <div className="min-w-0">
                                         <p className="font-medium text-gray-800 text-sm md:text-[15px] truncate">{res.razon_social || res.type}</p>
