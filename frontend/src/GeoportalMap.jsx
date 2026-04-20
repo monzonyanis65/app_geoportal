@@ -322,32 +322,31 @@ export default function GeoportalMap() {
     return (
         <div className="w-full h-screen relative font-sans bg-gray-100">
 
-            {/* Top Navbar Header */}
-            <nav className="absolute top-0 left-0 w-full h-[72px] bg-white shadow z-[9999] flex items-center justify-between px-6 border-b border-gray-200">
-                <div className="flex items-center gap-6">
+            {/* Top Navbar Header (Optimizado para móvil) */}
+            <nav className="absolute top-0 left-0 w-full h-[72px] bg-white shadow z-[9999] flex items-center justify-between px-2 md:px-6 border-b border-gray-200">
+                <div className="flex items-center gap-2 md:gap-4 flex-shrink-0">
                     {/* Alcaldía Logo */}
                     <div className="flex items-center justify-center">
-                        <img src={logoAlcaldia} alt="Logo Alcaldía" className="h-[52px] w-auto object-contain drop-shadow-sm" />
-                    </div>
-
-
-
-                    <div className="ml-4" class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                        <h1 className="text-xl font-bold text-gray-800 tracking-tight leading-tight">Geoportal Catastral</h1>
-                        <p className="text-[13px] font-medium text-gray-500 ">Alcaldía del Municipio San Cristóbal</p>
+                        <img src={logoAlcaldia} alt="Logo Alcaldía" className="h-10 md:h-[52px] w-auto object-contain drop-shadow-sm" />
                     </div>
                 </div>
+
+                <div className="flex flex-col items-center justify-center text-center px-2 flex-grow">
+                    <h1 className="text-sm md:text-xl font-bold text-gray-800 tracking-tight leading-tight">Geoportal Catastral</h1>
+                    <p className="hidden md:block text-[13px] font-medium text-gray-500">Alcaldía del Municipio San Cristóbal</p>
+                </div>
+
                 {/* Sumat Logo */}
-                <div className="flex items-center justify-center pl-4 border-l-2 border-gray-100">
-                    <img src={logoSumat} alt="Logo SUMAT" className="h-[46px] w-auto object-contain drop-shadow-sm" />
+                <div className="flex items-center justify-center pl-2 md:pl-4 border-l-2 border-gray-100 flex-shrink-0">
+                    <img src={logoSumat} alt="Logo SUMAT" className="h-8 md:h-[46px] w-auto object-contain drop-shadow-sm" />
                 </div>
             </nav>
 
             {/* Map Content Area */}
             <div className="absolute top-[72px] left-0 right-0 bottom-0 z-0">
 
-                {/* Floating Search Bar */}
-                <div className={`absolute top-4 left-4 z-[1000] w-full max-w-[390px] transition-all duration-300 ${buscadorEnfocado ? 'shadow-2xl' : 'shadow-md'} bg-white rounded-2xl flex flex-col ${idsCapasActivas.length === 0 ? 'opacity-80' : ''}`}>
+                {/* Floating Search Bar (Optimizado para móvil) */}
+                <div className={`absolute top-4 left-4 z-[1000] w-[calc(100%-80px)] md:w-full md:max-w-[390px] transition-all duration-300 ${buscadorEnfocado ? 'shadow-2xl' : 'shadow-md'} bg-white rounded-2xl flex flex-col ${idsCapasActivas.length === 0 ? 'opacity-80' : ''}`}>
                     <form onSubmit={manejarEnvioBusqueda} className="flex items-center px-4 py-3">
                         <input
                             type="text"
